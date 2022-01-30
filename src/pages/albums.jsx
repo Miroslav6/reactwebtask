@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { productData } from "../db-products";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,67 +10,46 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useSelector, useDispatch} from 'react-redux'
 import { increment } from '../actions';
+import api from '../api/posts'
 
-const Products = () => {
-
+const Albums = () => {
   const [products, setProducts] = useState(productData);
   const [width, setWidth] = useState('Ширина');
   const [height, setHeight] = useState('Височина');
   const [diameter, setDiameter] = useState('Диаметър');
   const [brand, setBrand] = useState('Марка');
   const [sorting, setSorting] = useState('Сортиране');
-
-  const couter = useSelector(state => state.counter)
   const dispatch = useDispatch();
-  console.log(couter);
-  const clearState = () => {
-    setWidth('Ширина');
-    setHeight('Височина');
-    setDiameter('Диаметър');
-    setBrand('Марка');
-  };
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([])
 
   useEffect(() => {
-    let filteredProducts = productData;
-    if(width !== 'Ширина') {
-      filteredProducts = filteredProducts.filter(product => product.sizewidth === width)
+    const fetchData = async () =>{
+      setLoading(true);
+      try {
+        const {data: response} = await api.get('/photos');
+        const album1 = response.filter(album => album.albumId == 1);
+        const album2 = response.filter(album => album.albumId == 2);
+        const album3 = response.filter(album => album.albumId == 3);
+        const album4 = response.filter(album => album.albumId == 4);
+        const album5 = response.filter(album => album.albumId == 5);
+        const albums = ([...album1, ...album2, ...album3, ...album4, ...album5]);
+        setData(albums);
+      } catch (error) {
+        console.error(error.message);
+      }
+      setLoading(false);
     }
 
-    if(height !== 'Височина') {
-      filteredProducts = filteredProducts.filter(product => product.sizeheight === height)
-    }
+    fetchData();
+  }, []);
 
-    if(diameter !== 'Диаметър') {
-      filteredProducts = filteredProducts.filter(product => product.sizediameter === diameter)
-    }
-
-    if(brand !== 'Марка') {
-      filteredProducts = filteredProducts.filter(product => product.brand === brand)
-    }
-
-    // if(sorting !== 'Цена възходящо') {
-    //   alert(1);
-    //   filteredProducts = filteredProducts.filter(product => product.brand === brand)
-    // }
-
-    setProducts(filteredProducts);
-
-  },[width, height, diameter, brand, sorting]);
-
+  console.log(data);
+  
   let allUniqueWidths = [...new Set(productData.map((data) => data.sizewidth).sort()), 'Ширина'];
   let allUniqueHeights = [...new Set(productData.map((data) => data.sizeheight).sort()), 'Височина'];
   let allUniqueDiameters = [...new Set(productData.map((data) => data.sizediameter).sort()), 'Диаметър'];
   let allUniqueBrands = [...new Set(productData.map((data) => data.brand).sort()), 'Марка'];
-
-const ascendingOrder = (a, b) => 
-{
-  return a.price > b.price ? 1 : -1;
-}
-
-const descentOrder = (a, b) => 
-{
-  return a.price < b.price ? 1 : -1;
-}
 
 const handleFilterChange = (e, filterType) => {
 switch (filterType) {
@@ -85,10 +65,6 @@ switch (filterType) {
     case "brand":
       setBrand(e.target.value)
       break;
-    // case "sorting":
-    //   setSorting(e.target.value)
-    //     console.log(e.target.value);
-    //     break;
     }
 };
 
@@ -111,6 +87,15 @@ switch (filterType) {
 
   return (
     <div className='container mt-5'>
+      <div>
+    {loading && <div>Loading</div>}
+    {!loading && (
+      <div>
+        <h2>Doing stuff with data</h2>
+        {data.map(item => (<span>{item.albumId}</span>))}
+      </div>
+    )}
+    </div>
       <div className='row breadcrumb'>
         <h1>Мото гуми</h1>
       </div>
@@ -184,9 +169,6 @@ switch (filterType) {
             </FormControl>
           </Box>
         </div>
-        <div className='col col-sm-3 mb-5 stock-item'>
-          <Button variant="contained" onClick={clearState} className='ml-3 h-100'>Изчисти</Button>
-        </div>
       </div>
       <div className='row'>
         <div className='col col-sm-3 mb-5 stock-item'>
@@ -243,14 +225,12 @@ switch (filterType) {
         </div>
       </div>
       <div className='row stock-container'>
-        {products.sort(ascendingOrder).map((data, key) => {
+        {data.sort().map((album, key) => {
           return (
             <div className='col col-sm-3 mb-5 text-center' key={key}>
-              <a href={'/product/' + data.id} className='products-item h-100 p-3 pt-5'>
-                <div> <img loading="lazy" src= {'/Files/Images/Products/'+data.brand+'.png'} alt="Brand image" className='brand-image'/> </div>
-                <div>{data.images ? <img loading="lazy" src={data.images[0].original} alt="Tire image" /> : ''}</div>
-                <h3 className='pb-2 border-bottom'>{data.position} {data.brand} {data.model} {data.sizewidth} {data.sizeheight} {data.sizediameter}</h3>
-                <div className='products-price'><strong>{data.price}лв</strong></div>
+              <a href={'/product/' + album.id} className='products-item h-100 p-3 pt-5'>
+                <div>{album.url ? <img loading="lazy" src={album.url} alt="Album image" /> : ''}</div>
+                <h3 className='pb-2 border-bottom'>{album.title}</h3>
               </a>
               
               <span onClick={() => dispatch(increment())}><i className="bi bi-heart"></i>Добави в любими</span>
@@ -263,4 +243,4 @@ switch (filterType) {
   )
 }
 
-export default Products;
+export default Albums;
