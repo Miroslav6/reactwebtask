@@ -5,8 +5,7 @@ import reportWebVitals from './reportWebVitals'
 import Home from './pages/home';
 import Layout from './pages/layout'
 import Albums from './pages/albums'
-import Contacts from './pages/contacts'
-import ProductPage from './pages/ProductPage';
+import AlbumPage from './pages/albumpage';
 import NoPage from './pages/NoPage'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
@@ -26,8 +25,7 @@ ReactDOM.render(
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="albums" element={<Albums />} />
-              <Route path="contacts" element={<Contacts />} />
-              <Route path="/product/:productId" element={<ProductPage />} />
+              <Route path="/albums/:albumId" element={<AlbumPage />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
