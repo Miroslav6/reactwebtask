@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Home = (props) => {
-  
-  useEffect(() => {
-    
-  }, [])
-
   return (
     <>
       <div className='container'>

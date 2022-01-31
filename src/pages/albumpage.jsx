@@ -7,16 +7,17 @@ import api from '../api/posts'
 
 const AlbumPage = (props) => {
 
-  const { albumtId } = useParams();
-  console.log('albumtId',albumtId);
+  const { albumId } = useParams();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([])
-  const album = data.find(({ id }) => id == albumtId);
- debugger
+  const album = data.find(({ id }) => id == albumId);
+  console.log(album);
   // const images = album.images;
-
+  console.log(data);
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const { data: response } = await api.get('/photos');
         const album1 = response.filter(album => album.albumId == 1);
@@ -29,22 +30,27 @@ const AlbumPage = (props) => {
       } catch (error) {
         console.error(error.message);
       }
+      setLoading(false);
     }
 
     fetchData();
   }, []);
 
   return (
+    <>
+    {loading && <div>Loading</div>}
+    {!loading && (
     <div className="container mt-5">
     <div className='row'>
         <div className='col col-sm-6'>
           {/* <ImageGallery items={images} /> */}
+          <div>{album.url ? <img loading="lazy" src={album.url} alt="Album image" /> : ''}</div>
         </div>
         <div className='col col-sm-6 entry-content'>
 
 
           <div className='col col-sm-3 mb-5 text-center'>
-            <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album image" /> : ''}</div>
+            
 
               <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}</h3>
               <h3 className='pb-2 '>{album.title}</h3>
@@ -55,6 +61,9 @@ const AlbumPage = (props) => {
         </div>
       </div>
     </div>
+    )}
+    </>
+    
   );
 };
 

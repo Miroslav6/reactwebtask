@@ -42,7 +42,6 @@ const Albums = () => {
 
   let allUniqueWidths = [...new Set(productData.map((data) => data.sizewidth).sort()), 'Ширина'];
   let allUniqueHeights = [...new Set(productData.map((data) => data.sizeheight).sort()), 'Височина'];
-  let allUniqueDiameters = [...new Set(productData.map((data) => data.sizediameter).sort()), 'Диаметър'];
 
   const handleFilterChange = (e, filterType) => {
     switch (filterType) {
@@ -52,9 +51,6 @@ const Albums = () => {
       case "height":
         setHeight(e.target.value)
         break;
-      case "diameter":
-        setDiameter(e.target.value)
-        break;
     }
   };
 
@@ -63,9 +59,6 @@ const Albums = () => {
   };
   const handleChangeHeight = (event) => {
     handleFilterChange(event, 'height')
-  };
-  const handleChangeDiameter = (event) => {
-    handleFilterChange(event, 'diameter')
   };
 
   return (
@@ -109,28 +102,6 @@ const Albums = () => {
                       onChange={handleChangeHeight}
                     >
                       {allUniqueHeights?.map(data => {
-                        return (
-                          <MenuItem key={data} value={data}>
-                            {data}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
-              <div className='col col-sm-3 mb-5 stock-item'>
-                <Box>
-                  <FormControl fullWidth>
-                    <InputLabel id="diameter-select-label">Диаметър</InputLabel>
-                    <Select
-                      labelId="diameter-select-label"
-                      id="diameter-select"
-                      value={diameter}
-                      label="Диаметър"
-                      onChange={handleChangeDiameter}
-                    >
-                      {allUniqueDiameters?.map(data => {
                         return (
                           <MenuItem key={data} value={data}>
                             {data}
