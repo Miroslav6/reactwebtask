@@ -6,6 +6,7 @@ import Home from './pages/home';
 import Layout from './pages/layout'
 import Albums from './pages/albums'
 import AlbumPage from './pages/albumpage';
+import Favourites from './pages/favourites';
 import NoPage from './pages/NoPage'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
@@ -26,6 +27,7 @@ ReactDOM.render(
               <Route index element={<Home />} />
               <Route path="albums" element={<Albums />} />
               <Route path="/albums/:albumParamId-:paramId" element={<AlbumPage />} />
+              <Route path="/favourites" element={<Favourites />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
