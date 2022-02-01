@@ -11,8 +11,6 @@ import api from '../api/posts'
 
 const Albums = () => {
   const [width, setWidth] = useState('Ширина');
-  const [height, setHeight] = useState('Височина');
-  const [diameter, setDiameter] = useState('Диаметър');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([])
@@ -37,28 +35,19 @@ const Albums = () => {
 
     fetchData();
   }, []);
-
-  console.log(data);
-
+  
   let allUniqueWidths = [...new Set(productData.map((data) => data.sizewidth).sort()), 'Ширина'];
-  let allUniqueHeights = [...new Set(productData.map((data) => data.sizeheight).sort()), 'Височина'];
 
   const handleFilterChange = (e, filterType) => {
     switch (filterType) {
       case "width":
         setWidth(e.target.value)
         break;
-      case "height":
-        setHeight(e.target.value)
-        break;
     }
   };
 
   const handleChangeWidth = (event) => {
     handleFilterChange(event, 'width')
-  };
-  const handleChangeHeight = (event) => {
-    handleFilterChange(event, 'height')
   };
 
   return (
@@ -90,42 +79,20 @@ const Albums = () => {
                   </FormControl>
                 </Box>
               </div>
-              <div className='col col-sm-3 mb-5 stock-item'>
-                <Box>
-                  <FormControl fullWidth>
-                    <InputLabel id="height-select-label">Височина</InputLabel>
-                    <Select
-                      labelId="height-select-label"
-                      id="height-select"
-                      value={height}
-                      label="Височина"
-                      onChange={handleChangeHeight}
-                    >
-                      {allUniqueHeights?.map(data => {
-                        return (
-                          <MenuItem key={data} value={data}>
-                            {data}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
             </div>
             <div className='separator' />
             <div className='row stock-container'>
               {data.map((album, key) => {
                 return (
                   <div className='col col-sm-3 mb-5 text-center' key={key}>
-                    <a href={'/albums/' + album.albumId} className='products-item h-100 p-3 pt-5'>
-                      <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album image" /> : ''}</div>
-                      
-                      <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}</h3>
-                      <h3 className='pb-2 '>{album.title}</h3>
-                    </a>
-
-                    <span onClick={() => dispatch(increment())}><i className="bi bi-heart"></i>Добави в любими</span>
+                    <div className='products-item h-100 '>
+                      <a href={'/albums/' + album.albumId + '-' + album.id} className='p-3 pt-5'>
+                        <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album image" /> : ''}</div>
+                        <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}</h3>
+                        <h3 className='pb-2 '>{album.title}</h3>
+                      </a>
+                      <span onClick={() => dispatch(increment())}><i className="bi bi-heart fa-sm"></i>Add to Favourites</span>
+                    </div>
                   </div>
                 );
               })}

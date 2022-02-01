@@ -25,7 +25,7 @@ ReactDOM.render(
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="albums" element={<Albums />} />
-              <Route path="/albums/:albumId" element={<AlbumPage />} />
+              <Route path="/albums/:albumParamId-:paramId" element={<AlbumPage />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
