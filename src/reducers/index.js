@@ -1,5 +1,4 @@
 import counterReducer from "./counter";
-import loggedReducer from "./isLogged";
 import {combineReducers} from 'redux';
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
@@ -7,12 +6,11 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['counter','isLogged']
+    whitelist: ['counter']
 }
 
 const rootReducer = combineReducers({
-    counter: counterReducer,
-    isLogged: loggedReducer
+    addFavourite: counterReducer
 })  
 
 export default persistReducer(persistConfig, rootReducer);

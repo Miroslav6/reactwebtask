@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { increment } from '../actions';
+import { addFavourite } from '../actions';
 import api from '../api/posts'
 
 const AlbumPage = (props) => {
@@ -45,7 +45,7 @@ const AlbumPage = (props) => {
             <div className='col col-sm-6 entry-content'>
               <h3 className='pb-2 border-bottom'>AlbumID  {currentItem.albumId}-{currentItem.id}</h3>
               <h3 className='pb-2 '>{currentItem.title}</h3>
-              <span onClick={() => dispatch(increment())}><i className="bi bi-heart"></i>Add to Favourites</span>
+              <span onClick={() => dispatch(addFavourite())}><i className="bi bi-heart"></i>Add to Favourites</span>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useSelector, useDispatch } from 'react-redux'
-import { increment } from '../actions';
+import { addFavourite } from '../actions';
 import api from '../api/posts'
 
 const Albums = () => {
@@ -91,7 +91,7 @@ const Albums = () => {
                         <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}</h3>
                         <h3 className='pb-2 '>{album.title}</h3>
                       </a>
-                      <span onClick={() => dispatch(increment())}><i className="bi bi-heart fa-sm"></i>Add to Favourites</span>
+                      <span onClick={() => dispatch(addFavourite(album))}><i className="bi bi-heart fa-sm"></i>Add to Favourites</span>
                     </div>
                   </div>
                 );
