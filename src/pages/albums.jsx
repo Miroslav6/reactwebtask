@@ -8,12 +8,15 @@ import Select from '@mui/material/Select';
 import { useSelector, useDispatch } from 'react-redux'
 import { addFavourite } from '../actions';
 import api from '../api/posts'
+import { array } from 'yargs';
 
 const Albums = () => {
   const [width, setWidth] = useState('Ширина');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +52,12 @@ const Albums = () => {
   const handleChangeWidth = (event) => {
     handleFilterChange(event, 'width')
   };
+
+  const onBtnFavourites = (album) => {
+    setFavorites([...favorites, album])
+    dispatch(addFavourite(favorites));
+  };
+
 
   return (
     <div className='container mt-5'>
@@ -91,7 +100,7 @@ const Albums = () => {
                         <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}</h3>
                         <h3 className='pb-2 '>{album.title}</h3>
                       </a>
-                      <span onClick={() => dispatch(addFavourite(album))}><i className="bi bi-heart fa-sm"></i>Add to Favourites</span>
+                      <span onClick={() => onBtnFavourites(album)}><i className="bi bi-heart fa-sm"></i>Add to Favourites</span>
                     </div>
                   </div>
                 );

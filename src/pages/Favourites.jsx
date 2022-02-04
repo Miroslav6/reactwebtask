@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 const Favourites = (props) => {
-    const favoriteCards = useSelector((state) => state.addFavourite);
+    const favoriteCards = useSelector(state => state.addFavourite);
     console.log(favoriteCards);
   return (
     <>
+    
+        
       <div className='container'>
+          
       <div className='row stock-container'>
-              {/* {favoriteCards?.map((album, key) => {
+      {favoriteCards.albumId}
+              {favoriteCards?.map((album, key) => {
                 return (
                   <div className='col col-sm-3 mb-5 text-center' key={key}>
                     <div className='products-item h-100 '>
@@ -20,7 +24,7 @@ const Favourites = (props) => {
                     </div>
                   </div>
                 );
-              })} */}
+              })}
             </div>
       </div>
     </>
