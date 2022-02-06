@@ -1,5 +1,3 @@
-// import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from './types';
-
 export const addFavourite = (album) => {
     return {
         type: 'ADD',

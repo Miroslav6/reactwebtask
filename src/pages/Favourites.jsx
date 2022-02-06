@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const Favourites = (props) => {
     const favoriteCards = useSelector(state => state.addFavourite);
-    console.log(favoriteCards);
+   
+    console.log('statedata', favoriteCards);
+
   return (
     <>
     
@@ -11,8 +13,8 @@ const Favourites = (props) => {
       <div className='container'>
           
       <div className='row stock-container'>
-      {favoriteCards.albumId}
-              {favoriteCards?.map((album, key) => {
+      
+              {favoriteCards.map((album, key) => {
                 return (
                   <div className='col col-sm-3 mb-5 text-center' key={key}>
                     <div className='products-item h-100 '>

@@ -5,20 +5,25 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addFavourite } from '../actions';
 import api from '../api/posts'
-import { array } from 'yargs';
 
 const Albums = () => {
   const [width, setWidth] = useState('Ширина');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   
+  const stateFavorites = useSelector(state => state.addFavourite);
+
+  const [favorites, setFavorites] = useState(stateFavorites); 
 
   useEffect(() => {
+     if(favorites) {
+      setFavorites(favorites);
+    }
+
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -37,8 +42,9 @@ const Albums = () => {
     }
 
     fetchData();
-  }, []);
-  
+    dispatch(addFavourite(favorites));
+  }, [favorites]);
+
   let allUniqueWidths = [...new Set(productData.map((data) => data.sizewidth).sort()), 'Ширина'];
 
   const handleFilterChange = (e, filterType) => {
@@ -54,10 +60,8 @@ const Albums = () => {
   };
 
   const onBtnFavourites = (album) => {
-    setFavorites([...favorites, album])
-    dispatch(addFavourite(favorites));
+    setFavorites([...favorites, album]);
   };
-
 
   return (
     <div className='container mt-5'>
