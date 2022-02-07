@@ -15,7 +15,7 @@ console.log(stateFavorites.length);
       <div className='container mt-5'>
      
         <div className='row stock-container'>
-               { stateFavorites.length? '' : <p className='col col-sm-12'>There is no Favourites</p>}
+               { stateFavorites.length? '' : <p className='col col-sm-12 display-4 text-center'><i className="bi bi-heart fa-sm"></i> No Favourites</p>}
                 {stateFavorites.map((album, key) => {
                   return (
                     <div className='col col-sm-12 col-md-6 col-lg-3  mb-5 text-center' key={key}>
