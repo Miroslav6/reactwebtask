@@ -13,7 +13,6 @@ const AlbumPage = (props) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([])
   const [currentItem] = data.filter(al => al.id == paramId);
-  // const images = album.images;
 
   useEffect(() => {
     const fetchData = async () => {

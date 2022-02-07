@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Home = (props) => {
   return (
     <>
-      <div className='container'>
+      <div className='container mt-5'>
         <ol>
           <li>Да се двигне ReactJS проект с Redux и Redux-Persist към него</li>
           <li>Да се вземе фийда от това URL: https://jsonplaceholder.typicode.com/photos</li>

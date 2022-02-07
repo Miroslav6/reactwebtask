@@ -9,7 +9,7 @@ const Favourites = () => {
     const onDeleteFavourites = (album) => {
       dispatch(removeFavourite(album));
     };
-console.log(stateFavorites.length);
+    
   return (
     <>
       <div className='container mt-5'>
