@@ -9,6 +9,5 @@ export const removeFavourite = (album) => {
     return {
         type: 'DELETE',
         payload: album
-        
     };
 };

@@ -15,7 +15,7 @@ console.log('hookvaror', favorites);
   }, [favorites]);
 
     const onDeleteFavourites = (album) => {
-      // dispatch(removeFavourite(album));
+      dispatch(removeFavourite(album));
       // setFavorites([...favorites, album]);
 
       // const filtered = favorites.filter(album => album.id == 1);
