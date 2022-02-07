@@ -5,11 +5,10 @@ export const addFavourite = (album) => {
     };
 };
 
-export const removeFavourite = index => {
+export const removeFavourite = (album) => {
     return {
-        type: 'FAVOURITE_REMOVED',
-        payload: {
-            index: index
-        }
+        type: 'DELETE',
+        payload: album
+        
     };
 };

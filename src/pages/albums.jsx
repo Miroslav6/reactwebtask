@@ -18,7 +18,7 @@ const Albums = () => {
   const stateFavorites = useSelector(state => state.addFavourite);
 
   const [favorites, setFavorites] = useState(stateFavorites); 
-
+console.log(favorites);
   useEffect(() => {
      if(favorites) {
       setFavorites(favorites);
