@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import reportWebVitals from './reportWebVitals'
 import Home from './pages/home';
 import Layout from './pages/layout'
 import Albums from './pages/albums'
@@ -36,5 +35,3 @@ ReactDOM.render(
     </BrowserRouter></>,
   document.getElementById('root')
 );
-
-reportWebVitals();
