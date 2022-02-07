@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import { productData } from "../db-products";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -45,20 +44,6 @@ console.log(favorites);
     dispatch(addFavourite(favorites));
   }, [favorites]);
 
-  let allUniqueWidths = [...new Set(productData.map((data) => data.sizewidth).sort()), 'Ширина'];
-
-  const handleFilterChange = (e, filterType) => {
-    switch (filterType) {
-      case "width":
-        setWidth(e.target.value)
-        break;
-    }
-  };
-
-  const handleChangeWidth = (event) => {
-    handleFilterChange(event, 'width')
-  };
-
   const onBtnFavourites = (album) => {
     setFavorites([...favorites, album]);
   };
@@ -69,35 +54,10 @@ console.log(favorites);
         {loading && <div>Loading</div>}
         {!loading && (
           <div>
-            <div className='row'>
-              <div className='col col-sm-3 mb-5 stock-item'>
-                <Box>
-                  <FormControl fullWidth>
-                    <InputLabel id="width-select-label">Ширина</InputLabel>
-                    <Select
-                      labelId="width-select-label"
-                      id="width-select"
-                      value={width}
-                      label="Ширина"
-                      onChange={handleChangeWidth}
-                    >
-                      {allUniqueWidths?.map(data => {
-                        return (
-                          <MenuItem key={data} value={data}>
-                            {data}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
-            </div>
-            <div className='separator' />
             <div className='row stock-container'>
               {data.map((album, key) => {
                 return (
-                  <div className='col col-sm-3 mb-5 text-center' key={key}>
+                  <div className='col col-sm-12 col-md-6 col-lg-3  mb-5 text-center' key={key}>
                     <div className='products-item h-100 '>
                       <a href={'/albums/' + album.albumId + '-' + album.id} className='p-3 pt-5'>
                         <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album image" /> : ''}</div>
