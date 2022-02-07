@@ -80,11 +80,6 @@ main {
             }
         }
 
-        .brand-image{
-            width: 200px;
-            max-width: 60%;
-        }
-
     }
 
     .entry-content {
@@ -124,33 +119,6 @@ main {
     height: 227px;
     margin-bottom: $margin-s;
     overflow: hidden;
-}
-
-.product-brand-image{
-    width: 200px;
-    max-width: 60%;
-}
-
-.product-price {
-    font-size: $fontsize-xxl;
-    font-weight: 700;
-    margin-bottom: $margin-m;
-    color: $color-3;
-}
-
-.products-price {
-    font-size: $fontsize-l;
-    font-weight: 700;
-    margin-bottom: $margin-m;
-    color: $color-3;
-}
-
-.MuiBox-root{
-    background-color: $color-1;
-}
-
-.image-gallery {
-    background-color: $color-1;
 }
 
 .delete-card {

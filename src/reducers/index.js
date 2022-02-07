@@ -1,4 +1,4 @@
-import counterReducer from "./counter";
+import favouritesReducer from "./favreducer";
 import {combineReducers} from 'redux';
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
@@ -9,7 +9,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    addFavourite: counterReducer
+    addFavourite: favouritesReducer
 })  
 
 export default persistReducer(persistConfig, rootReducer);

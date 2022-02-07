@@ -1,5 +1,5 @@
 //reducer
-const counterReducer = (state = '', action) => {
+const favouritesReducer = (state = '', action) => {
   switch (action.type) {
     case "ADD":
       return action.payload;
@@ -10,4 +10,4 @@ const counterReducer = (state = '', action) => {
 
   }
 }
-export default counterReducer;
+export default favouritesReducer;
