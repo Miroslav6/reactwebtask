@@ -20,7 +20,7 @@ const Favourites = () => {
                     <div className='col col-sm-12 col-md-6 col-lg-3 mb-5 text-center' key={key}>
                       <a onClick={() => onDeleteFavourites(album)} className='h-100 delete-card'>
                       <div className='products-item p-5 h-100 '>
-                          <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album image" /> : ''}</div>
+                          <div>{album.url ? <img loading="lazy" src={album.thumbnailUrl} alt="Album" /> : ''}</div>
                           <h3 className='pb-2 border-bottom'>AlbumID - {album.albumId}-{album.id}</h3>
                           <h3 className='pb-2 '>{album.title}</h3>
                       </div>

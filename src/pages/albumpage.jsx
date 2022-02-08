@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addFavourite } from '../actions';
 import api from '../api/posts'
 
-const AlbumPage = (props) => {
+const AlbumPage = () => {
 
   const { albumParamId } = useParams();
   const { paramId } = useParams();
@@ -28,7 +28,7 @@ const AlbumPage = (props) => {
     }
 
     fetchData();
-  }, []);
+  }, [albumParamId]);
 
   return (
     <>
@@ -39,18 +39,16 @@ const AlbumPage = (props) => {
         <div className="container mt-5">
           <div className='row'>
             <div className='col col-sm-6'>
-              <div>{currentItem.url ? <img loading="lazy" src={currentItem.url} alt="Album image" /> : ''}</div>
+              <div>{currentItem.url ? <img loading="lazy" src={currentItem.url} alt="Album" /> : ''}</div>
             </div>
             <div className='col col-sm-6 entry-content'>
-              <h3 className='pb-2 border-bottom'>AlbumID  {currentItem.albumId}-{currentItem.id}</h3>
+              <h3 className='pb-2 border-bottom'>ID:  {currentItem.albumId}-{currentItem.id}</h3>
               <h3 className='pb-2 '>{currentItem.title}</h3>
-              <span onClick={() => dispatch(addFavourite())}><i className="bi bi-heart"></i>Add to Favourites</span>
             </div>
           </div>
         </div>
       )}
     </>
-
   );
 };
 
