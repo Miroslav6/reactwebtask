@@ -1,4 +1,5 @@
 {
+  "homepage":"https://miroslav6.github.io/reactwebtask/",
   "name": "reactwebtask",
   "version": "0.1.0",
   "private": true,
@@ -31,6 +32,8 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -61,6 +64,7 @@
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^3.2.3",
     "react-router-dom": "^6.2.1",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
