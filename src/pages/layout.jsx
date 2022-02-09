@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Logo from '../Files/Images/logo.png'
 
 const Layout = () => {
     return (
@@ -8,7 +9,7 @@ const Layout = () => {
                     <div className='row'>
                         <div className='col col-sm-2'>
                             <a href='/' title='logo'>
-                                <img src='/Files/Images/logo.png' alt="Logo" />
+                                <img src={Logo} alt="Logo" />
                             </a>
                         </div>
                         <div className='col col-sm-7'>
